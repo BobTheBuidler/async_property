@@ -112,10 +112,10 @@ class AsyncCachedPropertyDescriptor:
                 value = await self._fget(instance)
                 self.__set__(instance, value)
                 return value
-        return load_value
+        return lambda: shield(load_value())
 
     def already_loaded(self, instance):
         return AwaitableProxy(self.get_cache_value(instance))
 
     def not_loaded(self, instance):
-        return AwaitableOnly(shield(self.get_loader(instance)))
+        return AwaitableOnly(self.get_loader(instance))
