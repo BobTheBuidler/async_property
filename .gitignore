@@ -104,3 +104,4 @@ ENV/
 
 # IDEA
 .idea/
+.worktrees/
